@@ -8,6 +8,8 @@ django = "*"
 django-debug-toolbar = "*"
 scikit-surprise = "*"
 python-decouple = "*"
+pandas = "*"
+matplotlib = "*"
 
 [dev-packages]
 

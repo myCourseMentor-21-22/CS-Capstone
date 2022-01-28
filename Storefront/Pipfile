@@ -10,6 +10,7 @@ scikit-surprise = "*"
 python-decouple = "*"
 pandas = "*"
 matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 

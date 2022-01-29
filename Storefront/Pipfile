@@ -11,6 +11,7 @@ python-decouple = "*"
 pandas = "*"
 matplotlib = "*"
 seaborn = "*"
+openpyxl = "*"
 
 [dev-packages]
 

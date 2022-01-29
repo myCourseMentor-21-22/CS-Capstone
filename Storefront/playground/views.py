@@ -9,17 +9,20 @@ import json
 from .models import Book
 
 # Create your views here.
-ratings_data = pd.read_csv('./data/books.csv', on_bad_lines='skip')
 
 def say_hello(request):
-    qs = Book.objects.all()
-    readers = [{'ISBN': x.isbn, 'Book-Title': x.title, 'Year-Of-Publication': x.year, 'Publisher': x.publisher} for x in qs]
+    # qs = Book.objects.all()
+    # readers = [{'ISBN': x.isbn, 'Book-Title': x.title, 'Year-Of-Publication': x.year, 'Publisher': x.publisher} for x in qs]
 
-    df = pd.DataFrame(readers)
+    # df = pd.DataFrame(readers)
 
-    json_records = df.reset_index().to_json(orient='records')
-    data = []
-    data = json.loads(json_records)
-    context = {'d', data}
+    # json_records = df.reset_index().to_json(orient='records')
+    # data = []
+    # data = json.loads(json_records)
+    # context = {'d', data}
 
+    # return render(request, 'hello.html', context)
+
+    data = pd.read_excel('./data/CS210HW1.xlsx')
+    context = {'d': data.to_html()}
     return render(request, 'hello.html', context)

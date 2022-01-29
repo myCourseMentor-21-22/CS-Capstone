@@ -9,3 +9,10 @@ class Book(models.Model):
     publisher = models.CharField(max_length=100)
     def __str__(self):
         return self.title
+
+class Student(models.Model):
+    stu_id = models.IntegerField()
+    name = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return str(self.stu_id) + ', ' + self.name

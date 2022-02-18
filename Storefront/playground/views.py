@@ -11,6 +11,6 @@ from .models import Book
 # Create your views here.
 
 def say_hello(request):
-    data = pd.read_excel('./data/CS210HW1.xlsx')
+    data = pd.read_csv('./data/cs210_capstone_project.csv')
     context = {'d': data.to_html()}
     return render(request, 'hello.html', context)

@@ -14,6 +14,7 @@ seaborn = "*"
 openpyxl = "*"
 jupyterlab = "*"
 notebook = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

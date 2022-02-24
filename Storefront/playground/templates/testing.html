@@ -27,9 +27,25 @@
             </div>
         </nav>
         <br>
-
         <main class="page-section">
-            
+            <table class="table table-striped table-light">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-sd"><h5>Student ID</h5></th>
+                        <th scope="col" class="col-sd"><h5>Class</h5></th>
+                        <th scope="col" class="col-sd"><h5>Grade</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rows in data %}
+                    <tr scope="row">
+                        {% for d in rows %}
+                        <td>{{d}}</td>
+                        {% endfor %}
+                    </tr> 
+                    {% endfor %}
+            </tbody>
+            </table>
         </main>
     </body>
 </html>

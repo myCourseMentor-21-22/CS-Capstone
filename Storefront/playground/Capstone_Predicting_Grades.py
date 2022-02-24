@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[507]:
+# In[43]:
 
 
 import pandas as pd
@@ -14,10 +14,10 @@ import matplotlib.pyplot as plt
 from sklearn.multioutput import MultiOutputRegressor
 from math import isnan
 import pprint
-file = pd.read_csv("./data/cs210_capstone_project.csv")
+file = pd.read_csv("../data/cs210_capstone_project.csv")
 
 
-# In[746]:
+# In[44]:
 
 
 df = pd.DataFrame(file)
@@ -26,7 +26,7 @@ pd.set_option('display.max_rows', None)
 len(df)
 
 
-# In[834]:
+# In[45]:
 
 
 grades = {'A':4.0, 'P':4.0, 'B':3.0, 'C':2.0, 'D':1.0, 'F':0.0, 'IN':None, 'W':None}
@@ -42,7 +42,7 @@ complete_df = complete_df.dropna()
 complete_df_with_nans
 
 
-# In[941]:
+# In[46]:
 
 
 ### Just in case all of one column is NaN's
@@ -77,7 +77,7 @@ print("Total students:", len(df))
 
 
 
-# In[836]:
+# In[47]:
 
 
 # knn = KNeighborsClassifier()
@@ -106,18 +106,18 @@ print("Total students:", len(df))
 # print("Highest performing K is: ", K)
 
 
-# In[837]:
+# In[48]:
+
+# TODO: Commented this out cause K was not defined.
+# knn = KNeighborsClassifier(n_neighbors=K, p=2)
+# knn.fit(X_train, y_train)
+# pred_k = knn.predict(X_test)
+# print(pred_k)
+# print(np.array(y_test))
+# print(knn.score(X_test, y_test))
 
 
-knn = KNeighborsClassifier(n_neighbors=K, p=2)
-knn.fit(X_train, y_train)
-pred_k = knn.predict(X_test)
-print(pred_k)
-print(np.array(y_test))
-print(knn.score(X_test, y_test))
-
-
-# In[936]:
+# In[ ]:
 
 
 def pred_grades(class_to_pred, student, df):
@@ -165,7 +165,7 @@ def merge_dfs(df1, df2):
     return df1.merge(df2, how='inner', on='Student')
 
 
-# In[937]:
+# In[ ]:
 
 
 def pred_using_knn(df, class_name, grades_df):
@@ -213,7 +213,7 @@ def pred_using_knn(df, class_name, grades_df):
     print(grades_df)
 
 
-# In[949]:
+# In[ ]:
 
 
 def script():
@@ -241,27 +241,14 @@ def script():
         return 0
 
 
-# In[950]:
+# In[50]:
 
 
 f = script()
 
 
-# In[952]:
+# In[ ]:
 
 
 final_df = final_df.reindex(sorted(final_df.columns), axis=1)
 final_df
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-

@@ -8,6 +8,13 @@ django = "*"
 django-debug-toolbar = "*"
 scikit-surprise = "*"
 python-decouple = "*"
+pandas = "*"
+matplotlib = "*"
+seaborn = "*"
+openpyxl = "*"
+jupyterlab = "*"
+notebook = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

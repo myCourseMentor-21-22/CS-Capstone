@@ -21,10 +21,10 @@
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#page-top"><h1>My Course Mentor</h1></a>
-                <a href="{% url 'info' %}">Home</a>
+                <a href="{% url 'index' %}">Home</a>
                 <a href="{% url 'info' %}">My Information</a>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Help</a>
-                <a href="{% url 'login' %}">Logout</a>
+                <a href="{% url 'log' %}">Logout</a>
             </div>
         </nav>
         <br>
@@ -36,10 +36,9 @@
         <section>
           <div class="container">
             <h2>Name: {{ name }}</h2>
-            <h2>ID: {{ stu_id }}</h2>
-            <h2>School:</h2>
-            <h2>Grade:</h2>
-            <a href="{% url 'edit' %}">EDIT</a>
+            <h2>Username: {{ username }}</h2>
+            <h2>Email: {{ email }}</h2>
+            <a href="{% url 'edit' %}">Change Password</a>
 
           </div>
         </section>

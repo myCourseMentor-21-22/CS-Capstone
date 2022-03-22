@@ -20,10 +20,10 @@ def index(request):
     return render(request, 'home.html')
 
 def my_information(request):
-    data = Student.objects.get(stu_id=1)  
-    name_cookie = str(data)
-    sid = str(Student.objects.get(name="John Doe"))
-    return render(request, 'info.html', {"name":name_cookie[2:], "stu_id":sid[:1]} )
+    name = request.user.first_name + " " + request.user.last_name
+    email = request.user.email
+    username = request.user.username
+    return render(request, 'info.html', {"name":name, "email":email, "username":username} )
 
 @csrf_exempt
 def log(request):
@@ -41,8 +41,13 @@ def log(request):
     return render(request,'login.html')
 
 def edit(request):
-    s = str(Student.objects.get(name=name_cookie))[2:]
-    return render(request, 'edit.html', {"name":s})
+    if request.method == "POST":
+        password = request.POST['password']
+        request.user.set_password(password)
+        request.user.save()
+        return redirect('index')
+
+    return render(request, 'edit.html')
 
 @csrf_exempt
 def register(request):
@@ -62,6 +67,7 @@ def register(request):
 
 def logout_view(request):
     logout(request)
+    return redirect('log')
 
 def testing(request):
     return render(request, 'testing.html')

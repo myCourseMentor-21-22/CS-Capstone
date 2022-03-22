@@ -22,10 +22,9 @@ def index(request):
     return render(request, 'home.html')
 
 def my_information(request):
-    data = Student.objects.get(stu_id=1)  
-    name_cookie = str(data)
-    sid = str(Student.objects.get(name="John Doe"))
-    return render(request, 'info.html', {"name":name_cookie[2:], "stu_id":sid[:1]} )
+    # Getting the name of the logged in user. Right now prints the username.
+    # TODO: We'll wanna somehow get the actual name of the person later.
+    return render(request, 'info.html', {'name':request.user, 'stu_id':request.user.id})
 
 @csrf_exempt
 def log(request):
@@ -38,9 +37,13 @@ def log(request):
             login(request, user)
             return redirect('/playground')
         else:
-            return redirect('register')
+            return redirect('/register')
     
     return render(request,'login.html')
+
+def info(request):
+        s = str(Student.objects.get(name=name_cookie))[2:]
+        return render(request, 'info.html', {'name':s})
 
 def edit(request):
     s = str(Student.objects.get(name=name_cookie))[2:]

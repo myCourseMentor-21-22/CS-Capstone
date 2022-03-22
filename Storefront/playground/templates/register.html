@@ -40,29 +40,30 @@
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <form id="contactForm" method="post" action="">
                             <!-- Email address input-->
-                            
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="Fname" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">First Name</label>
-                    
+                                <input class="form-control" name="username" data-sb-validations="required" />
+                                <label for="email">UserName</label>                    
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="Lname" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Last Name</label>
-                                
+                                <input class="form-control" name="fname"  data-sb-validations="required" />
+                                <label for="email">First Name</label>                    
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="lname" data-sb-validations="required" />
+                                <label for="email">Last Name</label>    
                             </div>
                             
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <input class="form-control" name="email" placeholder="name@example.com" data-sb-validations="required" />
                                 <label for="email">Email address</label>
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
                             <!-- Password input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="password" type="tel" placeholder="*******" data-sb-validations="required" />
+                                <input class="form-control" name="password" type="tel" placeholder="*******" data-sb-validations="required" />
                                 <label for="password">Password</label>
                                 <div class="invalid-feedback" data-sb-feedback="password:required">A password is required.</div>
                             </div>
@@ -71,7 +72,7 @@
                                 <label for="password">Re-enter Password</label>
                                 <div class="invalid-feedback" data-sb-feedback="password:required">A password is required.</div>
                             </div>
-
+                            
                             <!-- Submit success message-->
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
@@ -79,10 +80,12 @@
 
                                 </div>
                             </div>
+
                             <!-- Submit error message-->
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             <!-- Submit Button-->
-                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Create Account</button>
+                            
+                            <button id="submitButton" type="submit">Create Account</button>
                         </form>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Book(models.Model):
@@ -16,3 +17,14 @@ class Student(models.Model):
 
     def __str__(self):
         return str(self.stu_id) + ', ' + self.name
+        
+class Credentials(models.Model):
+    email = models.CharField(max_length=100, null=True)
+    password = models.CharField(max_length=100, null=True)
+    
+
+    def __str__(self):
+        return self.email
+
+class Post(models.Model):
+    post = models.CharField(max_length=100)

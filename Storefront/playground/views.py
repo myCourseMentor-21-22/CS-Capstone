@@ -26,6 +26,9 @@ def my_information(request):
     # TODO: We'll wanna somehow get the actual name of the person later.
     return render(request, 'info.html', {'name':request.user, 'stu_id':request.user.id})
 
+def predict_prior(request):
+    return render(request, 'predict_prior.html')
+
 @csrf_exempt
 def log(request):
     if request.method == "POST":

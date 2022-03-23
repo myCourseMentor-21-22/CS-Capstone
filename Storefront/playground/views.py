@@ -3,6 +3,7 @@ from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -19,6 +20,7 @@ name_cookie = ""
 def index(request):
     return render(request, 'home.html')
 
+
 def my_information(request):
     name = request.user.first_name + " " + request.user.last_name
     email = request.user.email
@@ -30,13 +32,18 @@ def log(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        user = authenticate( request, username=User.objects.get(email=email), password=password)
+        try:
+            username = User.objects.get(email=email)
+        except:
+            username = "None"
+        user = authenticate( request, username=username, password=password)
        
         if user is not None:      
             login(request, user)
             return redirect('/playground')
         else:
-            return redirect('register')
+            message="Username/Password is Wrong"
+            return render(request, 'login.html', {"message":message})
     
     return render(request,'login.html')
 

@@ -7,8 +7,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.multioutput import MultiOutputRegressor
 from math import isnan
 import pprint
-file = pd.read_csv("CS210Prereqs.csv")
-file2 = pd.read_csv("CS210Final.csv")
+file = pd.read_csv("./data/CS210Prereqs.csv")
+file2 = pd.read_csv("./data/CS210Final.csv")
 
 df_grades = pd.DataFrame(file)
 df_in_class = pd.DataFrame(file2)
@@ -77,9 +77,10 @@ def pred_grades(class_name, student_df, df):
     knn = KNeighborsClassifier(n_neighbors=K, p=2, n_jobs=-1)
     knn.fit(X_train, y_train)
     pred_k = knn.predict(X_test)
-    print("\nPredicted a grade of a", pred_k[0], "for", class_name, "with an accuracy of",
-          "{:.2%}".format(max(accuracies)), "\n")
+    res = "Predicted Grade: " + pred_k[0] + " --- Accuracy: " + "{:.2%}".format(max(accuracies))
+    print(res)
     student_df[class_name] = pred_k[0]
+    return res
 
 
 def script():
@@ -163,5 +164,65 @@ def prompt(user_answer):
     else:
         return 0
 
+# Django Calls
+def pred_prior(grade1, grade2, grade3, grade4):
+    student_df = {}
+    student_df['CS101'] = [float(grade1)]
+    student_df['CS102'] = [float(grade2)]
+    student_df['CS140'] = [float(grade3)]
+    student_df['MTH120'] = [float(grade4)]
+    student_df = pd.DataFrame.from_dict(student_df)
+    return pred_grades('Final Grade', student_df, df)
 
-start = script()
+def pred_next(grade1,grade2,grade3,grade4,grade5,grade6,grade7,grade8,grade9):
+    student_df = {}
+    print("\nEnter 0 if not taken assignment/test yet.\n")
+    student_df['CS101'] = [float(grade1)]
+    student_df['CS102'] = [float(grade2)]
+    student_df['CS140'] = [float(grade3)]
+    student_df['MTH120'] = [float(grade4)]
+    student_df['HW1'] = [float(grade5)]
+    student_df['Test1'] = [float(grade6)]
+    student_df['HW2'] = [float(grade7)]
+    student_df['Test2'] = [float(grade8)]
+    student_df['Final'] = [float(grade9)]
+
+    student_df = {key: val for key, val in student_df.items() if val != 0.0}
+    student_df = pd.DataFrame.from_dict(student_df)
+    assignments_not_taken = []
+    for i in student_df:
+        if student_df[i][0] == 0:
+            assignments_not_taken.append(i)
+
+    assignment_drop_list = []
+    for i in student_df:
+        if i in assignments_not_taken[1:]:
+            assignment_drop_list.append(i)
+    student_df = student_df.drop(columns=assignment_drop_list)
+    return pred_grades(assignments_not_taken[0], student_df, df)
+
+def predict_final(grade1,grade2,grade3,grade4,grade5,grade6,grade7,grade8,grade9):
+    student_df = {}
+    student_df['CS101'] = [float(grade1)]
+    student_df['CS102'] = [float(grade2)]
+    student_df['CS140'] = [float(grade3)]
+    student_df['MTH120'] = [float(grade4)]
+    student_df['HW1'] = [float(grade5)]
+    student_df['Test1'] = [float(grade6)]
+    student_df['HW2'] = [float(grade7)]
+    student_df['Test2'] = [float(grade8)]
+    student_df['Final'] = [float(grade9)]
+
+    student_df = {key: val for key, val in student_df.items() if val != 0.0}
+    student_df = pd.DataFrame.from_dict(student_df)
+    assignments_not_taken = []
+    for i in student_df:
+        if student_df[i][0] == 0:
+            assignments_not_taken.append(i)
+
+    assignment_drop_list = []
+    for i in student_df:
+        if i in assignments_not_taken:
+            assignment_drop_list.append(i)
+    student_df = student_df.drop(columns=assignment_drop_list)
+    return pred_grades('Final Grade', student_df, df)

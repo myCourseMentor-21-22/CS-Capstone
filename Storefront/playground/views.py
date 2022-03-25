@@ -8,7 +8,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Student
-from .forms import PostCredentials, PostForm, PostUser
+from .forms import PostCredentials, PostForm, PostUser, PredictPriorForm
+from data import Final_Capstone_Prediction_Code as pred_code
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -27,7 +28,50 @@ def my_information(request):
     return render(request, 'info.html', {'name':request.user, 'stu_id':request.user.id})
 
 def predict_prior(request):
-    return render(request, 'predict_prior.html')
+    ctx={}
+    if (request.method == "POST"):
+        cs101=request.POST['grade1']
+        cs102 = request.POST['grade2']
+        cs103=request.POST['grade3']
+        mth120 = request.POST['grade4']
+        result = pred_code.pred_prior(cs101,cs102,cs103,mth120)
+        ctx = {'result' : result}
+
+    return render(request, "predict_prior.html", ctx)
+
+def predict_next(request):
+    ctx={}
+    if (request.method == "POST"):
+        cs101=request.POST['grade1']
+        cs102 = request.POST['grade2']
+        cs103=request.POST['grade3']
+        mth120 = request.POST['grade4']
+        g5 = request.POST['grade5']
+        g6 = request.POST['grade6']
+        g7 = request.POST['grade7']
+        g8 = request.POST['grade8']
+        g9 = request.POST['grade9']
+        result = pred_code.pred_next(cs101,cs102,cs103,mth120, g5, g6, g7, g8, g9)
+        ctx = {'result' : result}
+
+    return render(request, "predict_next.html", ctx)
+
+def predict_final(request):
+    ctx={}
+    if (request.method == "POST"):
+        cs101=request.POST['grade1']
+        cs102 = request.POST['grade2']
+        cs103=request.POST['grade3']
+        mth120 = request.POST['grade4']
+        g5 = request.POST['grade5']
+        g6 = request.POST['grade6']
+        g7 = request.POST['grade7']
+        g8 = request.POST['grade8']
+        g9 = request.POST['grade9']
+        result = pred_code.predict_final(cs101,cs102,cs103,mth120, g5, g6, g7, g8, g9)
+        ctx = {'result' : result}
+
+    return render(request, "predict_final.html", ctx)
 
 @csrf_exempt
 def log(request):

@@ -30,42 +30,56 @@
         <section class="page-section" id="contact">
             <div class="container">
                 <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Predict Grade Upon Start</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Predict Final Grade</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
+                {% if result %}
+                <h1>{{result}}</h1>
+                {% endif %}
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <form id="contactForm" method="post" action="">                           
+                        <form id="contactForm" method="post" action=""> {% csrf_token %}                           
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade1" data-sb-validations="required" />
-                                <label for="grade1">What grade did student get in CS101? Enter 0 if not taken.</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <label for="grade1">What grade did you receive in CS101?</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade2" data-sb-validations="required" />
-                                <label for="grade2">What grade did student get in CS102? Enter 0 if not taken.</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <label for="grade2">What grade did you receive in CS102?</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade3" data-sb-validations="required" />
-                                <label for="grade3">What grade did student get in CS140? Enter 0 if not taken.</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <label for="grade3">What grade did you receive in CS140?</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade4" data-sb-validations="required" />
-                                <label for="grade3">What grade did student get in MTH120? Enter 0 if not taken.</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <label for="grade4">What grade did you receive in MTH120?</label>
                             </div>
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade5" data-sb-validations="required" />
+                                <label for="grade5">What grade did you get on HW1?</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade6" data-sb-validations="required" />
+                                <label for="grade6">What grade did you get on Test1?</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade7" data-sb-validations="required" />
+                                <label for="grade7">What grade did you get on HW3?</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade8" data-sb-validations="required" />
+                                <label for="grade8">What grade did you get on Test2?</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade9" data-sb-validations="required" />
+                                <label for="grade9">What grade did you get on the Final?</label>
+                            </div>
                             <button id="submitButton" type="submit">Predict</button>
                         </form>
                     </div>

@@ -10,5 +10,7 @@ urlpatterns = [
     path('display_grades/', views.display_grades, name='display_grades'),
     path('edit/', views.edit, name='edit'),
     path('predict_prior/', views.predict_prior, name='predict_prior'),
+    path('predict_next/', views.predict_next, name='predict_next'),
+    path('predict_final/', views.predict_final, name='predict_final'),
     path('testing/', views.testing, name='testing')
 ]

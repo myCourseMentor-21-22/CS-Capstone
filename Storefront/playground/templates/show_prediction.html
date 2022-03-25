@@ -37,29 +37,35 @@
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                {% if result %}
-                <h1>{{result}}</h1>
-                {% endif %}
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <form id="contactForm" method="post" action=""> {% csrf_token %}                           
+                        <form id="contactForm" method="post" action="">                           
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade1" data-sb-validations="required" />
                                 <label for="grade1">What grade did you receive in CS101? Enter 0 if not taken.</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade2" data-sb-validations="required" />
                                 <label for="grade2">What grade did you receive in CS102? Enter 0 if not taken.</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade3" data-sb-validations="required" />
                                 <label for="grade3">What grade did you receive in CS140? Enter 0 if not taken.</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade4" data-sb-validations="required" />
-                                <label for="grade4">What grade did you receive in MTH120? Enter 0 if not taken.</label>
+                                <label for="grade3">What grade did you receive in MTH120? Enter 0 if not taken.</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             <button id="submitButton" type="submit">Predict</button>
                         </form>
                     </div>

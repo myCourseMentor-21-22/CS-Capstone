@@ -28,3 +28,9 @@ class Credentials(models.Model):
 
 class Post(models.Model):
     post = models.CharField(max_length=100)
+
+class PredictPrior(models.Model):
+    cs101 = models.FloatField()
+    cs102 = models.FloatField()
+    cs140 = models.FloatField()
+    mth120 = models.FloatField()

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Student
 from .forms import PostCredentials, PostForm, PostUser, PredictPriorForm
-from data import Final_Capstone_Prediction_Code as pred_code
+from data import Final_Capstone_Prediction_Code2 as pred_code
 
 import pandas as pd
 import matplotlib.pyplot as plt

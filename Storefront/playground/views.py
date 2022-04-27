@@ -38,7 +38,7 @@ def log(request):
             username = "None"
         user = authenticate( request, username=username, password=password)
        
-        if user is not None:      
+        if user is not None: 
             login(request, user)
             return redirect('/playground')
         else:
@@ -64,9 +64,14 @@ def register(request):
         lname = request.POST['lname']
         email = request.POST['email']
         password = request.POST['password']
-        user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
+        try:
+            user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
+        except:
+            message="User already exist"
+            return render(request, 'register.html', {"message":message})   
         user.set_password(password)
         user.save()
+
         return redirect("/playground")
 
 

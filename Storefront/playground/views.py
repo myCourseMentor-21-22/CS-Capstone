@@ -158,6 +158,28 @@ def edit(request):
     return render(request, 'edit.html')
 
 @csrf_exempt
+def update_grades(request):
+    if (request.method == "POST"):
+        user = request.user
+        stuentId = user.id
+        gradeData = GradeData.objects.get(studentId=user.id)
+
+        gradeData.studentId=user.id
+        gradeData.cs101=request.POST["grade1"]
+        gradeData.cs102=request.POST["grade2"] 
+        gradeData.cs140=request.POST["grade3"]
+        gradeData.mth120=request.POST["grade4"]
+        gradeData.hw1=request.POST["grade5"]
+        gradeData.test1=request.POST["grade6"]
+        gradeData.hw3=request.POST["grade7"]
+        gradeData.test2=request.POST["grade8"]
+        gradeData.final=request.POST["grade9"]
+        gradeData.save()
+        return redirect("/playground")
+    else:
+        return render(request, 'update_grades.html')
+
+@csrf_exempt
 def register(request):
     if request.method == "POST":
         username = request.POST['username']

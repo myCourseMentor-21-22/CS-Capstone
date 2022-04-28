@@ -96,6 +96,7 @@ def edit(request):
     #s = str(Student.objects.get(name=name_cookie))[2:]
     return render(request, 'edit.html')
 
+from .models import GradeData
 @csrf_exempt
 def register(request):
     if request.method == "POST":
@@ -107,6 +108,11 @@ def register(request):
         user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
         user.set_password(password)
         user.save()
+
+        gradeData = GradeData(studentId=user.id, cs101=request.POST["grade1"], cs102=request.POST["grade2"], cs140=request.POST["grade3"],
+        mth120=request.POST["grade4"], hw1=request.POST["grade5"], test1=request.POST["grade6"], hw3=request.POST["grade7"], test2=request.POST["grade8"], 
+        final=request.POST["grade9"])
+        gradeData.save()
         return redirect("/playground")
 
 

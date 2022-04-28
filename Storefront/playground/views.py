@@ -14,11 +14,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Create your views here.
-name_cookie = ""
 
 
 def index(request):
-    return render(request, 'home.html')
+    if User is None:
+        return render(request, 'home.html')
+    else:
+        return redirect('/login')
 
 
 def my_information(request):

@@ -11,6 +11,8 @@ from .models import Student
 from .forms import PostCredentials, PostForm, PostUser, PredictPriorForm
 from data import Final_Capstone_Prediction_Code2 as pred_code
 
+from .models import GradeData
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import logging
@@ -20,7 +22,66 @@ name_cookie = ""
 
 
 def index(request):
-    return render(request, 'home.html')
+    if (request.user.is_authenticated):
+        id = request.user.id
+        stuData = GradeData.objects.get(studentId=id)
+
+        cs101=stuData.cs101
+        cs102=stuData.cs102
+        cs140 = stuData.cs140
+        mth120=stuData.mth120
+        hw1=stuData.hw1
+        test1=stuData.test1
+        hw2=stuData.hw3
+        test2=stuData.test2
+        final=stuData.final
+
+        nextAssignment = ''
+        if cs101 == '':
+            recorded_grades['cs101']
+            nextAssignment='cs101'
+        elif cs102 == '':
+            nextAssignment='cs102'
+        elif cs140=='':
+            nextAssignment='cs140'
+        elif mth120=='':
+            nextAssignment='mth120'
+        elif hw1=='':
+            nextAssignment='hw1'
+        elif test1=='':
+            nextAssignment='test 1'
+        elif hw2=='':
+            nextAssignment='hw2'
+        elif test2=='':
+            nextAssignment='test 2'
+        elif final == '':
+            nextAssignment = 'final'
+            
+        pred_next = pred_code.pred_next(cs101,cs102,cs140,mth120,hw1,test1,hw2,test2,final)
+        pred_final = pred_code.predict_final(cs101,cs102,cs140,mth120,hw1,test1,hw2,test2,final)
+
+        data = {
+            'name': request.user,
+            'id': request.user.id,
+            'recorded_grades':
+            {'cs101': cs101,
+                'cs102': cs102,
+                'cs140': cs140,
+                'mth120': mth120,
+                'hw1': hw1,
+                'test1': test1,
+                'hw2': hw2,
+                'test2': test2,
+                'final': final
+            },
+            'next_assignment': nextAssignment,
+            'pred_next': pred_next,
+            'pred_final': pred_final
+        }
+
+        return render(request, 'dashboard.html', data)
+    else:
+        return render(request, 'register.html')
 
 def my_information(request):
     # Getting the name of the logged in user. Right now prints the username.
@@ -96,7 +157,6 @@ def edit(request):
     #s = str(Student.objects.get(name=name_cookie))[2:]
     return render(request, 'edit.html')
 
-from .models import GradeData
 @csrf_exempt
 def register(request):
     if request.method == "POST":
@@ -108,6 +168,8 @@ def register(request):
         user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
         user.set_password(password)
         user.save()
+
+        login(request, user)
 
         gradeData = GradeData(studentId=user.id, cs101=request.POST["grade1"], cs102=request.POST["grade2"], cs140=request.POST["grade3"],
         mth120=request.POST["grade4"], hw1=request.POST["grade5"], test1=request.POST["grade6"], hw3=request.POST["grade7"], test2=request.POST["grade8"], 

@@ -1,56 +1,63 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myCourseMentor</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>My Course Mentor</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'playground/assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'playground/styles.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="../static/playground/dashboard.css">
 </head>
 <body>
     <div class="navbar">
         <div class="container">
             <a href="#" class="logo">MY COURSE MENTOR</a>
-
-            <nav>
-                <ul>
-                    <li class="current"><a href="#">Home</a></li>
-                    <li><a href="#">My Info</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
+            <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand" style="margin-left:-200px" href="#page-top"><h1>My Course Mentor <img src="{% static 'playground/froglogo_turq.png' %}" width="200px"></h1></a>
+                    <a href="{% url 'info' %}">My Information</a>
+                    <a href="{% url 'predict_prior' %}">Prediction</a>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Help</a>
+                    <a href="{% url 'log' %}">Logout</a>
+                </div>
             </nav>
         </div>
     </div>
 
     <section class="assignments-section">
+        <br><br><br><br>
         <div class="container">
             <ul>
-                <h2>Previous Assignments:</h2>
+                <h2>Recorded Grades:</h2>
+                
+                {% for assignment, grade in recorded_grades.items %}
+                {% if grade %}
                 <li>
-                    <h1 class="assignment-name">CS 370: Chapter 1 Challenges</h1>
-                    <p class ="prediction">Received Grade: B</p>
-                    <p>Recommended Partner: Jane Doe</p>
-                    <p>Recommended Material: Database Design Ch. 2</p>
+                    <h1 class="assignment-name">{{assignment}}</h1>
+                    <p class ="prediction">Received Grade: {{grade}}</p>
                 </li>
-                <h2>Upcoming Assignments:</h2>
+                {% endif %}
+                {% endfor %}
+
+                <h2>Next Assignment's Predicted Grade:</h2>
                 <li>
-                    <h1 class="assignment-name">CS 370: Chapter 2 Challenges</h1>
-                    <p class ="prediction">Predicted Grade: B</p>
-                    <p>Recommended Partner: Jane Doe</p>
-                    <p>Recommended Material: Database Design Ch. 2</p>
+                    <h1 class="assignment-name">{{next_assignment}}</h1>
+                    <p class ="prediction">{{pred_next}}</p>
                 </li>
+
+                <h2>Overall Predicted Grade:</h2>
                 <li>
-                    <h1 class="assignment-name">CS 370: Chapter 3 Challenges</h1>
-                    <p class ="prediction">Predicted Grade: B</p>
-                    <p>Recommended Partner: Jane Doe</p>
-                    <p>Recommended Material: Database Design Ch. 2</p>
-                </li>
-                <li>
-                    <h1 class="assignment-name">CS 370: Chapter 4 Challenges</h1>
-                    <p class ="prediction">Predicted Grade: B</p>
-                    <p>Recommended Partner: Jane Doe</p>
-                    <p>Recommended Material: Database Design Ch. 2</p>
+                    <p class ="prediction">{{pred_final}}</p>
                 </li>
             </ul>
         </div>

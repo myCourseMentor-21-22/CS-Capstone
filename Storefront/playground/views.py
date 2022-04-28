@@ -89,12 +89,12 @@ def log(request):
     return render(request,'login.html')
 
 def info(request):
-        s = str(Student.objects.get(name=name_cookie))[2:]
-        return render(request, 'info.html', {'name':s})
+    s = str(Student.objects.get(name=name_cookie))[2:]
+    return render(request, 'info.html', {'name':s})
 
 def edit(request):
-    s = str(Student.objects.get(name=name_cookie))[2:]
-    return render(request, 'edit.html', {"name":s})
+    #s = str(Student.objects.get(name=name_cookie))[2:]
+    return render(request, 'edit.html')
 
 @csrf_exempt
 def register(request):

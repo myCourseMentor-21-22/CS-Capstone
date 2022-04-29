@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from playground.testing import *
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -18,11 +19,14 @@ import matplotlib.pyplot as plt
 import logging
 
 # Create your views here.
-name_cookie = ""
-
+def my_information(request):
+    name = request.user.first_name + " " + request.user.last_name
+    email = request.user.email
+    username = request.user.username
+    return render(request, 'info.html', {"name":name, "email":email, "username":username} )
 
 def index(request):
-    if (request.user.is_authenticated):
+    if User is not None:
         id = request.user.id
         stuData = GradeData.objects.get(studentId=id)
 
@@ -81,7 +85,7 @@ def index(request):
 
         return render(request, 'dashboard.html', data)
     else:
-        return render(request, 'register.html')
+        return redirect('/login')
 
 def my_information(request):
     # Getting the name of the logged in user. Right now prints the username.
@@ -139,29 +143,39 @@ def log(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        user = authenticate( request, username=User.objects.get(email=email), password=password)
+        try:
+            username = User.objects.get(email=email)
+        except:
+            username = "None"
+        user = authenticate(request, username=username, password=password)
        
-        if user is not None:      
+        if user is not None: 
             login(request, user)
             return redirect('/playground')
         else:
-            return redirect('/register')
+            message="Username/Password is Wrong"
+            return render(request, 'login.html', {"message":message})
     
     return render(request,'login.html')
+
+def edit(request):
+    if request.method == "POST":
+        password = request.POST['password']
+        request.user.set_password(password)
+        request.user.save()
+        login(request, request.user)
+        return redirect("/playground")
+
+    return render(request, 'edit.html')
 
 def info(request):
     s = str(Student.objects.get(name=name_cookie))[2:]
     return render(request, 'info.html', {'name':s})
 
-def edit(request):
-    #s = str(Student.objects.get(name=name_cookie))[2:]
-    return render(request, 'edit.html')
-
 @csrf_exempt
 def update_grades(request):
     if (request.method == "POST"):
         user = request.user
-        stuentId = user.id
         gradeData = GradeData.objects.get(studentId=user.id)
 
         gradeData.studentId=user.id
@@ -187,7 +201,12 @@ def register(request):
         lname = request.POST['lname']
         email = request.POST['email']
         password = request.POST['password']
-        user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
+        try:
+            user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
+        except:
+            message="User already exist"
+            return render(request, 'register.html', {"message":message})
+
         user.set_password(password)
         user.save()
 
@@ -214,6 +233,7 @@ def display_grades(request):
     return render(request, 'testing.html', context)
 def logout_view(request):
     logout(request)
+    return redirect('log')
 
 def testing(request):
     return render(request, 'testing.html')

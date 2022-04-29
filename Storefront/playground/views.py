@@ -25,6 +25,9 @@ def my_information(request):
     username = request.user.username
     return render(request, 'info.html', {"name":name, "email":email, "username":username} )
 
+def help(request):
+    return render(request, 'help.html')
+
 def index(request):
     if User is not None:
         id = request.user.id

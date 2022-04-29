@@ -13,5 +13,6 @@ urlpatterns = [
     path('predict_next/', views.predict_next, name='predict_next'),
     path('predict_final/', views.predict_final, name='predict_final'),
     path('update_grades/', views.update_grades, name='update_grades'),
-    path('testing/', views.testing, name='testing')
+    path('testing/', views.testing, name='testing'),
+    path('help/', views.help, name='help')
 ]

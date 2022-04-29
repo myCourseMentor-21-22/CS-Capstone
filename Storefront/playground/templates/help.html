@@ -22,9 +22,8 @@
             <div class="container">
                 <a class="navbar-brand" style="margin-left:-200px" href="{% url 'index' %}"><h1>My Course Mentor <img src="{% static 'playground/froglogo_blue.png' %}" width="200px"></h1></a>
                 <a href="{% url 'info' %}">My Information</a>
-                <a href="{% url 'predict_prior' %}">Prediction</a>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Help</a>
-                <a href="{% url 'log' %}">Logout</a>
+                <a href="#">Help</a>
+                <a href="{% url 'log' %}">Register</a>
             </div>
         </nav>
         <br>
@@ -38,8 +37,30 @@
         <br>
         <section>
           <div class="container">
-            <h4>Click the "Prediction" button at the top to input the grades you have previously received. After the grades are input into the system, go to the home page to predict your next grade and final grade.</h4>
-
+              <h1 style="text-align: center; text-decoration: underline;"> Logging In </h1>
+              <h3>To login or create an account, please click the Register button on the top-right on the navigation bar. From there, you can login
+                  with an existing account or register a new one. You'll be requested to enter all of your recorded grades.
+                </h3>
+                <br>
+                <h1 style="text-align: center; text-decoration: underline;"> Predicting Grades </h1>
+                <h3>Upon logging in or registering, you'll be redirected to the myCourseMentor dashboard. Here, you'll be able to view all of your current grades,
+                  your predicted next grade, and your predicted final grade.</h3>
+                <br>
+                <h1 style="text-align: center; text-decoration: underline;"> Updating Grades </h1>
+                <h3>To update your grades, you can click the Update Grades button on the navigation bar while you're on the dashboard. You'll be prompted to enter in each of your grades.
+                    After you submit your changes, you'll be redirected to the dashboard. Your predictions will be be updated!
+                </h3>
+                <br>
+                <h1 style="text-align: center; text-decoration: underline;"> Viewing Personal Information </h1>
+                <h3>You can press the My Information button on the navigation bar to view some of your stored information, specifically your username and unique ID.
+                    You'll also notice that you can change your password from here.
+                </h3>
+                <br>
+                <h1 style="text-align: center; text-decoration: underline;"> Changing your Password </h1>
+                <h3>You can change your password from the My Information page. Once you enter your new password, press submit to save your changes.</h3>
+                <br>
+                <h1 style="text-align: center; text-decoration: underline;"> Logging Out </h1>
+                <h3>You can logout of myCourseMentor by pressing the Logout button on the top-right of the navigation bar.</h3>
           </div>
         </section>
         

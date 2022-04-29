@@ -20,8 +20,9 @@
     <body>
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><h1>My Course Mentor</h1></a>
+                <a class="navbar-brand" style="margin-left:-200px" href="#page-top"><h1>My Course Mentor <img src="{% static 'playground/froglogo_turq.png' %}" width="200px"></h1></a>
                 <a href="{% url 'info' %}">My Information</a>
+                <a href="{% url 'predict_prior' %}">Prediction</a>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Help</a>
                 <a href="{% url 'log' %}">Logout</a>
             </div>
@@ -29,37 +30,40 @@
         <br>
         <br>
         <br>
-        <section class="page-section portfolio" id="grade">
+        <br>
+        <br>
+        <br>
+        <!-- Contact Section-->
+        <section class="page-section" id="contact">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 ms-auto">
-                        <h2 class="lead">Predicted Grade</h2>
-                        <div> 
-                            <img height="100" width="100" src="{% static 'playground/assets/img/portfolio/A.png' %}">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 me-auto">
-                        <h2 class="lead">Recommended Partners</h2>
-                        <img height="50" width="300" src="{% static 'playground/assets/img/avataaars.svg' %}" >
-                        <img height="50" width="300" src="{% static 'playground/assets/img/avataaars.svg' %}" >
-                        <img height="50" width="300" src="{% static 'playground/assets/img/avataaars.svg' %}" >
+                <!-- Contact Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Select an Option</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                {% if result %}
+                <h1>{{result}}</h1>
+                {% endif %}
+                <!-- Contact Section Form-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+                        <form id="null">                      
+                            <div class="form-floating mb-3">
+                                <h2><a href="{% url 'predict_prior' %}">Predict Final Grade Prior to Class</a></h2>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <h2><a href="{% url 'predict_next' %}">Predict Next Grade</a></h2>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <h2><a href="{% url 'predict_final' %}">Predict Final Grade Given Existing Grades</a></h2>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="page-section portfolio" id="materials">
-            
-            <div class="container">
-                <div class="col-lg-4 me-auto">
-                    <h2 class="lead">Recommended Materials</h2>
-                    <div class="row">
-                        <div class="column">
-                            <img height="200" width="300" src="{% static 'playground/assets/img/portfolio/safe.png' %}" >
-                        </div>
-                    </div>              
-                </div>
-            </div>
-        </section>
-        
     </body>
 </html>

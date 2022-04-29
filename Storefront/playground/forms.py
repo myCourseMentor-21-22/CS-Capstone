@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import Credentials, Post
+from .models import Credentials, Post, PredictPrior
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -16,3 +16,8 @@ class PostCredentials(forms.ModelForm):
     class Meta:
         fields = ('email', 'password')
         model = Credentials
+
+class PredictPriorForm(forms.ModelForm):
+    class Meta:
+        model = PredictPrior
+        fields=['cs101','cs102','cs140','mth120']

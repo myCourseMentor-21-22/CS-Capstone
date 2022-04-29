@@ -26,7 +26,7 @@ def my_information(request):
     return render(request, 'info.html', {"name":name, "email":email, "username":username} )
 
 def index(request):
-    if User is None:
+    if User is not None:
         id = request.user.id
         stuData = GradeData.objects.get(studentId=id)
 
@@ -147,7 +147,7 @@ def log(request):
             username = User.objects.get(email=email)
         except:
             username = "None"
-        user = authenticate( request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
        
         if user is not None: 
             login(request, user)
@@ -163,9 +163,11 @@ def edit(request):
         password = request.POST['password']
         request.user.set_password(password)
         request.user.save()
-        return redirect('index')
+        login(request, request.user)
+        return redirect("/playground")
 
     return render(request, 'edit.html')
+
 def info(request):
     s = str(Student.objects.get(name=name_cookie))[2:]
     return render(request, 'info.html', {'name':s})
@@ -174,7 +176,6 @@ def info(request):
 def update_grades(request):
     if (request.method == "POST"):
         user = request.user
-        stuentId = user.id
         gradeData = GradeData.objects.get(studentId=user.id)
 
         gradeData.studentId=user.id
@@ -204,7 +205,8 @@ def register(request):
             user = User.objects.create_user(username=username, first_name=fname, last_name=lname, email=email)
         except:
             message="User already exist"
-            return render(request, 'register.html', {"message":message})   
+            return render(request, 'register.html', {"message":message})
+
         user.set_password(password)
         user.save()
 

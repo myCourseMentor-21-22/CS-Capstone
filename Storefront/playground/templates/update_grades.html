@@ -20,9 +20,9 @@
     <body id="page-top">
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" style="margin-left:-200px" href="{% url 'index' %}"><h1>My Course Mentor <img src="{% static 'playground/froglogo_blue.png' %}" width="200px"></h1></a>
+                <a class="navbar-brand" style="margin-left:-200px" href="#page-top"><h1>My Course Mentor <img src="{% static 'playground/froglogo_turq.png' %}" width="200px"></h1></a>
                 <a href="{% url 'info' %}">My Information</a>
-                <a href="{% url 'predict_prior' %}">Prediction</a>
+                <a href="{% url 'update_grades' %}">Update Grades</a>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Help</a>
                 <a href="{% url 'log' %}">Logout</a>
             </div>
@@ -37,37 +37,60 @@
         <section class="page-section" id="contact">
             <div class="container">
                 <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Predict Grade Prior to Class</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Update Grades</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                {% if result %}
-                <h1>{{result}}</h1>
-                {% endif %}
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <form id="contactForm" method="post" action=""> {% csrf_token %}                           
+                        <form id="contactForm" method="post" action="">
+                            <br><br>
+
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade1" data-sb-validations="required" />
-                                <label for="grade1">What grade did you receive in CS101? Enter 0 if not taken.</label>
+                                <label for="grade1">What grade did you receive in CS101? Enter nothing if not taken.</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade2" data-sb-validations="required" />
-                                <label for="grade2">What grade did you receive in CS102? Enter 0 if not taken.</label>
+                                <label for="grade2">What grade did you receive in CS102? Enter nothing if not taken.</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade3" data-sb-validations="required" />
-                                <label for="grade3">What grade did you receive in CS140? Enter 0 if not taken.</label>
+                                <label for="grade3">What grade did you receive in CS140? Enter nothing if not taken.</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="grade4" data-sb-validations="required" />
-                                <label for="grade4">What grade did you receive in MTH120? Enter 0 if not taken.</label>
+                                <label for="grade4">What grade did you receive in MTH120? Enter nothing if not taken.</label>
                             </div>
-                            <button id="submitButton" type="submit">Predict</button>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade5" data-sb-validations="required" />
+                                <label for="grade5">What grade did you get on HW1? Enter nothing of not taken.</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade6" data-sb-validations="required" />
+                                <label for="grade6">What grade did you get on Test1? Enter nothing if not taken.</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade7" data-sb-validations="required" />
+                                <label for="grade7">What grade did you get on HW2? Enter nothing if not taken.</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="grade8" data-sb-validations="required" />
+                                <label for="grade8">What grade did you get on Test2? Enter nothing if not taken.</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="hidden" class="form-control" name="grade9" data-sb-validations="required" />
+                            </div>
+
+                            <!-- Submit error message-->
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            <!-- Submit Button-->
+                            
+                            <button id="submitButton" type="submit">Update</button>
                         </form>
                     </div>
                 </div>

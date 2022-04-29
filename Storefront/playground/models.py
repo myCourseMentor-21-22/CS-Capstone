@@ -30,7 +30,20 @@ class Post(models.Model):
     post = models.CharField(max_length=100)
 
 class PredictPrior(models.Model):
+    studentId = models.IntegerField()
     cs101 = models.FloatField()
     cs102 = models.FloatField()
     cs140 = models.FloatField()
     mth120 = models.FloatField()
+
+class GradeData(models.Model):
+    studentId = models.IntegerField()
+    cs101 = models.CharField(max_length=6)
+    cs102 = models.CharField(max_length=6)
+    cs140 = models.CharField(max_length=6)
+    mth120 = models.CharField(max_length=6)
+    hw1 = models.CharField(max_length=6)
+    test1 = models.CharField(max_length=6)
+    hw3 = models.CharField(max_length=6)
+    test2 = models.CharField(max_length=6)
+    final = models.CharField(max_length=6)
